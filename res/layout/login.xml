@@ -19,7 +19,8 @@
   				<ImageView android:src="@drawable/logo"
   							android:layout_width="wrap_content"
   							android:layout_height="wrap_content"
-  							android:layout_marginLeft="10dip"/>
+  							android:layout_marginLeft="10dip" 
+  							android:contentDescription="@string/logo_desc"/>
   				<!-- Logo Ends -->
   		</LinearLayout>
   		<!--  Header Ends -->  
@@ -44,37 +45,47 @@
 		  <TextView android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:textColor="#372c24"
-		  		android:text="Email"/>
-		  <EditText android:layout_width="fill_parent"
-		  		android:layout_height="wrap_content"
-		  		android:layout_marginTop="5dip"
-		  		android:layout_marginBottom="20dip"
-		  		android:singleLine="true"/>
+		  		android:text="@string/Email"/>
+
+		  <EditText
+		      android:id="@+id/sig_email"
+		      android:layout_width="fill_parent"
+		      android:layout_height="wrap_content"
+		      android:layout_marginBottom="20dip"
+		      android:layout_marginTop="5dip"
+		      android:inputType="textEmailAddress"
+		      android:singleLine="true" />
+
 		  <!--  Password Label -->
 		  <TextView android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:textColor="#372c24"
-		  		android:text="Password"/>
-		  <EditText android:layout_width="fill_parent"
-		  		android:layout_height="wrap_content"
-		  		android:layout_marginTop="5dip"
-		  		android:singleLine="true"
-		  		android:password="true"/>
+		  		android:text="@string/Password"/>
+
+		  <EditText android:id="@+id/sig_password"
+		      android:layout_width="fill_parent"
+		      android:layout_height="wrap_content"
+		      android:layout_marginTop="5dip"
+		      android:singleLine="true" 
+		      android:inputType="textPassword"/>
+
 		  <!-- Login button -->	
 		  <Button android:id="@+id/btnLogin" 
 		  		android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:layout_marginTop="10dip"
-		  		android:text="Login"/>
+		  		android:text="@string/Login"
+		  		android:onClick="signIn"/>
+		  
 		  <!-- Link to Registration Screen -->		
 		  <TextView android:id="@+id/link_to_register" 
 		  		android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:layout_marginTop="40dip"
 		  		android:layout_marginBottom="40dip"
-		  		android:text="New to Twitter? Register here"
+		  		android:text="@string/hint_link_to_regist"
 		  		android:gravity="center"
-		  		android:textSize="20dip"
+		  		android:textSize="20sp"
 		  		android:textColor="#0b84aa"/>
 		    
 		</LinearLayout>

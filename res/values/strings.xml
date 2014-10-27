@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, LoginActivity!</string>
     <string name="app_name">AndroidLoginAndRegistration</string>
+    
+    <string name="logo_desc">logo desc</string>
+    
+    <string name="Full_Name">Full Name</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    
+    <string name="Login">Login</string>
+    <string name="hint_link_to_regist">New to Twitter? Register here</string>
+    <string name="hint_link_to_login">Already has account! Login here</string>
+    
+    <string name="Register_New_Account">Register New Account</string>
 </resources>

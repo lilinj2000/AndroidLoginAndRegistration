@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.androidhive.loginandregister"
+      package="com.wr.loginandregister"
       android:versionCode="1"
       android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".LoginActivity"
+        <activity android:name="com.wr.loginandregister.LoginActivity"
                   android:label="Login to your Account">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -15,7 +15,7 @@
         </activity>
         
         <!--  Entry for RegisterActivity.class -->
-        <activity android:name=".RegisterActivity"
+        <activity android:name="com.wr.loginandregister.RegisterActivity"
         		  android:label="Register New Account"></activity>
 
     </application>
