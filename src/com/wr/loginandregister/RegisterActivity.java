@@ -15,7 +15,7 @@ public class RegisterActivity extends Activity {
 	EditText editTextFullName, editTextEmail, editTextPassword;
 	Button btnRegister;
 	
-	LoginDataBaseAdapter loginDataBaseAdapter;
+	LoginDBAdapter loginDataBaseAdapter;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class RegisterActivity extends Activity {
 		});
         
         // get Instance  of Database Adapter   
-        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
+        loginDataBaseAdapter = new LoginDBAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
 
         // Get Refferences of Views

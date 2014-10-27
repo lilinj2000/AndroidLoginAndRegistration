@@ -6,18 +6,37 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DataBaseHelper extends SQLiteOpenHelper
+public class LoginDBOpenHelper extends SQLiteOpenHelper
 {
-	public DataBaseHelper(Context context, String name,CursorFactory factory, int version) 
+	//	table column name
+	public static final String KYE_ID = "_id";
+
+	public static final String KEY_FULL_NAME = "FULLNAME";
+	public static final String KEY_EMAIL = "EMAIL";
+	public static final String KEY_PASSWORD = "PASSWORD";
+
+	public static final String DATABASE_NAME = "login.db";
+	public static final int DATABASE_VERSION = 1;
+	public static final String DATABASE_TABLE = "LOGIN";
+	
+	// SQL Statement to create a new database.
+	private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE +
+			"( " + KYE_ID +" integer primary key autoincrement,"
+			+ KEY_FULL_NAME + " text, " 
+			+ KEY_EMAIL +" text, "
+			+ KEY_PASSWORD + " text); ";
+		
+	public LoginDBOpenHelper(Context context, String name,CursorFactory factory, int version) 
     {
 	           super(context, name, factory, version);
 	}
+	
 	// Called when no database exists in disk and the helper class needs
 	// to create a new one.
 	@Override
 	public void onCreate(SQLiteDatabase _db) 
 	{
-			_db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE);
+			_db.execSQL(DATABASE_CREATE);
 			
 	}
 	// Called when there is a database version mismatch meaning that the version

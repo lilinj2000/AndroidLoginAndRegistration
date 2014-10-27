@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	
-	LoginDataBaseAdapter loginDataBaseAdapter;
+	LoginDBAdapter loginDataBaseAdapter;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
 		});
         
         // create a instance of SQLite Database
-	     loginDataBaseAdapter=new LoginDataBaseAdapter(this);
+	     loginDataBaseAdapter=new LoginDBAdapter(this);
 	     loginDataBaseAdapter=loginDataBaseAdapter.open();
 	     
 
