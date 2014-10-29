@@ -49,8 +49,7 @@ public class RegisterActivity extends Activity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
 
         	public void onClick(View v) {
-        		// TODO Auto-generated method stub
-
+        		
         		String fullName=editTextFullName.getText().toString();
         		String emailAddress = editTextEmail.getText().toString();
         		String password=editTextPassword.getText().toString();

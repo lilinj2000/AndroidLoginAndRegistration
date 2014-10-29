@@ -81,8 +81,8 @@ public class LoginContentProvider extends ContentProvider {
 //		default: break;
 //		}
 		
-		if( !TextUtils.isEmpty(selection) )
-			queryBuilder.appendWhere(selection);
+//		if( !TextUtils.isEmpty(selection) )
+//			queryBuilder.appendWhere(selection);
 		
 		Cursor cursor = queryBuilder.query(db, projection, selection,
 				selectionArgs, groupBy, having, sortOrder);

@@ -65,10 +65,10 @@ public class LoginActivity extends Activity {
  				  LoginDBOpenHelper.KEY_PASSWORD};
  		   
  		   // Specify the where clause that will limit your results.
- 		   String where = LoginDBOpenHelper.KEY_EMAIL + "=" + emailAddress;
+ 		   String where = LoginDBOpenHelper.KEY_EMAIL + "= ?" ;
  		   
  		   // Replace these with valid SQL statements as necessary.
- 		   String whereArgs[] = null;
+ 		   String whereArgs[] = new String[] {emailAddress};
  		   String order = null;
  		   // Return the specified rows.
  		   Cursor resultCursor = cr.query(LoginContentProvider.CONTENT_URI,
