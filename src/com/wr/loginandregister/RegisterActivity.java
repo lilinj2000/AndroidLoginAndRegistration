@@ -3,6 +3,8 @@ package com.wr.loginandregister;
 import com.wr.loginandregister.R;
 
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +17,7 @@ public class RegisterActivity extends Activity {
 	EditText editTextFullName, editTextEmail, editTextPassword;
 	Button btnRegister;
 	
-	LoginDataBaseAdapter loginDataBaseAdapter;
+//	LoginDBAdapter loginDataBaseAdapter;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,8 +37,8 @@ public class RegisterActivity extends Activity {
 		});
         
         // get Instance  of Database Adapter   
-        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
+//        loginDataBaseAdapter = new LoginDBAdapter(this);
+//        loginDataBaseAdapter = loginDataBaseAdapter.open();
 
         // Get Refferences of Views
         editTextFullName=(EditText)findViewById(R.id.reg_fullname);
@@ -60,6 +62,23 @@ public class RegisterActivity extends Activity {
         			return;
         		}
         		
+        		
+        		// Create a new row of values to insert.
+        		ContentValues newValues = new ContentValues();
+        		// Assign values for each row.
+        		newValues.put(LoginDBOpenHelper.KEY_FULL_NAME,
+        				fullName);
+        		newValues.put(LoginDBOpenHelper.KEY_EMAIL,
+        				emailAddress);
+        		newValues.put(LoginDBOpenHelper.KEY_PASSWORD,
+        				password);
+        		
+        		// Get the Content Resolver
+        		ContentResolver cr = getContentResolver();
+        		// Insert the row into your table
+        		cr.insert(LoginContentProvider.CONTENT_URI,	newValues);
+        		Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+        		
 //        		// check if both password matches
 //        		if(!password.equals(confirmPassword))
 //        		{
@@ -67,11 +86,11 @@ public class RegisterActivity extends Activity {
 //        			return;
 //        		}
 //        		else
-        		{
-        			// Save the Data in Database
-        			loginDataBaseAdapter.insertEntry(fullName, emailAddress, password);
-        			Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
-        		}
+//        		{
+//        			// Save the Data in Database
+//        			loginDataBaseAdapter.insertEntry(fullName, emailAddress, password);
+//        			Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+//        		}
         	}
         });
     }
@@ -81,6 +100,6 @@ public class RegisterActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		
-		loginDataBaseAdapter.close();
+//		loginDataBaseAdapter.close();
 	}
 }
