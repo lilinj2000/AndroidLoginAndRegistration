@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.text.TextUtils;
 
 public class LoginContentProvider extends ContentProvider {
 	
@@ -45,7 +44,6 @@ public class LoginContentProvider extends ContentProvider {
 //	//The name and column index of each column in your database.
 //	//These should be descriptive.
 //	public static final String KEY_COLUMN_1_NAME = ¡°KEY_COLUMN_1_NAME¡±;
-	//TODO: Create public field for each column in your table.
 	
 	//SQLite Open Helper variable
 	private LoginDBOpenHelper loginOpenHelper;
