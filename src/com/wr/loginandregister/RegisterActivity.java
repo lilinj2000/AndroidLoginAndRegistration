@@ -4,6 +4,7 @@ import com.wr.loginandregister.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,10 +13,11 @@ import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
     
-	EditText editTextFullName, editTextEmail, editTextPassword;
-	Button btnRegister;
+	private EditText editTextFullName, editTextEmail, editTextPassword;
+	private Button btnRegister;
 	
-	LoginDBAdapter loginDataBaseAdapter;
+	private LoginController mController;
+	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,53 +36,53 @@ public class RegisterActivity extends Activity {
 			}
 		});
         
-        // get Instance  of Database Adapter   
-        loginDataBaseAdapter = new LoginDBAdapter(this);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
-
+        mController = new LoginController(this);
+        
         // Get Refferences of Views
         editTextFullName=(EditText)findViewById(R.id.reg_fullname);
         editTextEmail = (EditText)findViewById(R.id.reg_email);
         editTextPassword=(EditText)findViewById(R.id.reg_password);
         
         btnRegister=(Button)findViewById(R.id.btnRegister);
+        
         btnRegister.setOnClickListener(new View.OnClickListener() {
 
         	public void onClick(View v) {
-        		// TODO Auto-generated method stub
 
         		String fullName=editTextFullName.getText().toString();
         		String emailAddress = editTextEmail.getText().toString();
         		String password=editTextPassword.getText().toString();
-        		
+
         		// check if any of the fields are vaccant
-        		if(fullName.equals("") || password.equals("") || emailAddress.equals(""))
+        		if( TextUtils.isEmpty(fullName) 
+        				|| TextUtils.isEmpty(password) 
+        				|| TextUtils.isEmpty(emailAddress) )
         		{
-        			Toast.makeText(getApplicationContext(), "Field Vaccant", Toast.LENGTH_LONG).show();
+        			Toast.makeText(getApplicationContext(), "FullName, Email or Password is Empty.", Toast.LENGTH_LONG).show();
         			return;
         		}
+
+        		boolean result = mController.register(fullName, emailAddress, password);
         		
-//        		// check if both password matches
-//        		if(!password.equals(confirmPassword))
-//        		{
-//        			Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
-//        			return;
-//        		}
-//        		else
+        		if( result )
         		{
-        			// Save the Data in Database
-        			loginDataBaseAdapter.insertEntry(fullName, emailAddress, password);
-        			Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+        			Toast.makeText(getApplicationContext(), "Register Successfully.", Toast.LENGTH_LONG).show();
         		}
+        		else
+        		{
+        			Toast.makeText(getApplicationContext(), "Register failed.", Toast.LENGTH_LONG).show();
+        		}
+        		
+  
         	}
         });
-    }
+	}
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
+		
 		super.onDestroy();
 		
-		loginDataBaseAdapter.close();
+		mController.onDestroy();
 	}
 }

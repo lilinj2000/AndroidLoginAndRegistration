@@ -18,7 +18,7 @@ public class LoginDBAdapter
 	public  LoginDBAdapter(Context _context) 
 	{
 		context = _context;
-		dbHelper = new LoginDBOpenHelper(context, LoginDBOpenHelper.DATABASE_NAME, null, LoginDBOpenHelper.DATABASE_VERSION);
+		dbHelper = new LoginDBOpenHelper(context);
 	}
 	
 	public  LoginDBAdapter open() throws SQLException 
@@ -37,16 +37,10 @@ public class LoginDBAdapter
 		return db;
 	}
 
-	public void insertEntry(String fullName, String emailAddress, String password)
+	public void insertEntry(ContentValues theValue)
 	{
-		ContentValues newValues = new ContentValues();
-		// Assign values for each row.
-		newValues.put(LoginDBOpenHelper.KEY_FULL_NAME, fullName);
-		newValues.put(LoginDBOpenHelper.KEY_EMAIL, emailAddress);
-		newValues.put(LoginDBOpenHelper.KEY_PASSWORD,password);
-
 		// Insert the row into your table
-		db.insert(LoginDBOpenHelper.DATABASE_TABLE, null, newValues);
+		db.insert(LoginDBOpenHelper.DATABASE_TABLE, null, theValue);
 		///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
 	}
 

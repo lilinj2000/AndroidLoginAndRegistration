@@ -2,14 +2,13 @@ package com.wr.loginandregister;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class LoginDBOpenHelper extends SQLiteOpenHelper
 {
 	//	table column name
-	public static final String KYE_ID = "_id";
+	public static final String KEY_ID = "_id";
 
 	public static final String KEY_FULL_NAME = "FULLNAME";
 	public static final String KEY_EMAIL = "EMAIL";
@@ -21,14 +20,14 @@ public class LoginDBOpenHelper extends SQLiteOpenHelper
 	
 	// SQL Statement to create a new database.
 	private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE +
-			"( " + KYE_ID +" integer primary key autoincrement,"
+			"( " + KEY_ID +" integer primary key autoincrement,"
 			+ KEY_FULL_NAME + " text, " 
 			+ KEY_EMAIL +" text, "
 			+ KEY_PASSWORD + " text); ";
 		
-	public LoginDBOpenHelper(Context context, String name,CursorFactory factory, int version) 
+	public LoginDBOpenHelper(Context context) 
     {
-	           super(context, name, factory, version);
+	           super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
 	// Called when no database exists in disk and the helper class needs

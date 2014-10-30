@@ -3,9 +3,10 @@
       package="com.wr.loginandregister"
       android:versionCode="1"
       android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="8" 
+        android:targetSdkVersion="21" />
 
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:allowBackup="true">
         <activity android:name="com.wr.loginandregister.LoginActivity"
                   android:label="Login to your Account">
             <intent-filter>
@@ -17,6 +18,11 @@
         <!--  Entry for RegisterActivity.class -->
         <activity android:name="com.wr.loginandregister.RegisterActivity"
         		  android:label="Register New Account"></activity>
-
-    </application>
+        
+        <provider 
+            android:name="com.wr.loginandregister.LoginContentProvider"
+            android:authorities="com.wr.loginandregister.logincontentprovider"
+            android:exported="false" >
+        </provider>
+</application>
 </manifest>
