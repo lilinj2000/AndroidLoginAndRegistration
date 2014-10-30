@@ -24,6 +24,7 @@
   				<!-- Logo Ends -->
   		</LinearLayout>
   		<!--  Header Ends -->  
+  		
   		<!-- Footer Start -->
   		<LinearLayout android:id="@+id/footer"
   				android:orientation = "horizontal"

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ public class LoginActivity extends Activity {
 	private EditText editTextPassword;
 	
 	private LoginController mController;
+	
+	private String LOG_TAG = " com.wr.loginandregister.LoginActivity";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,9 @@ public class LoginActivity extends Activity {
         registerScreen.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				// Switching to Register screen
+				
+				Log.v(LOG_TAG, "Switching to Register screen");
+				
 				Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
 				startActivity(i);
 			}
@@ -48,9 +53,14 @@ public class LoginActivity extends Activity {
     // Methos to handleClick Event of login Button
  	public void signIn(View V)
  	   {	
+ 			Log.v(LOG_TAG, "signIn is triggered.");
+ 			
  		    // get The User name and Password
  		    String emailAddress=editTextEmail.getText().toString();
  		    String password=editTextPassword.getText().toString();
+ 		    
+ 		   Log.d(LOG_TAG, "email is " + emailAddress);
+ 		   Log.d(LOG_TAG, "password is " + password);
  		    
  		    if ( TextUtils.isEmpty(emailAddress) || TextUtils.isEmpty(password) )
  		    {
@@ -76,8 +86,11 @@ public class LoginActivity extends Activity {
 
  	@Override
  	protected void onDestroy() {
+ 		Log.v(LOG_TAG, "onDestroy is triggered.");
+ 		
  		super.onDestroy();
  	   
  		mController.onDestroy();
+ 		
  	}
 }

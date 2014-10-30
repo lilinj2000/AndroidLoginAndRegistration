@@ -10,8 +10,10 @@ public class LoginDBAdapter
 {	
 	// Variable to hold the database instance
 	public  SQLiteDatabase db;
+	
 	// Context of the application using the database.
 	private final Context context;
+	
 	// Database open/upgrade helper
 	private LoginDBOpenHelper dbHelper;
 	
@@ -41,7 +43,6 @@ public class LoginDBAdapter
 	{
 		// Insert the row into your table
 		db.insert(LoginDBOpenHelper.DATABASE_TABLE, null, theValue);
-		///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
 	}
 
 	public int deleteEntry(String emailAddress)
@@ -49,34 +50,43 @@ public class LoginDBAdapter
 		//String id=String.valueOf(ID);
 		String where = LoginDBOpenHelper.KEY_EMAIL + "=?";
 		int numberOFEntriesDeleted= db.delete(LoginDBOpenHelper.DATABASE_TABLE, where, new String[]{emailAddress}) ;
-		// Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
+		
 		return numberOFEntriesDeleted;
 	}
 
-		public String getSinlgeEntry(String emailAddress)
+	public String getSinlgeEntry(String emailAddress)
+	{
+		String password = "";
+		
+		Cursor cursor=db.query(LoginDBOpenHelper.DATABASE_TABLE, null,  LoginDBOpenHelper.KEY_EMAIL + "=?", new String[]{emailAddress}, null, null, null);
+		
+		if(cursor.getCount()<1)
 		{
-			Cursor cursor=db.query(LoginDBOpenHelper.DATABASE_TABLE, null,  LoginDBOpenHelper.KEY_EMAIL + "=?", new String[]{emailAddress}, null, null, null);
-	        if(cursor.getCount()<1) // UserName Not Exist
-	        {
-	        	cursor.close();
-	        	return "NOT EXIST";
-	        }
-		    cursor.moveToFirst();
-			String password= cursor.getString(cursor.getColumnIndex(LoginDBOpenHelper.KEY_PASSWORD));
 			cursor.close();
-			return password;				
+			return password;
 		}
-		public void  updateEntry(String fullName, String emailAddress, String password)
-		{
-			// Define the updated row content.
-			ContentValues updatedValues = new ContentValues();
-			// Assign values for each row.
-			updatedValues.put(LoginDBOpenHelper.KEY_PASSWORD, fullName);
-			updatedValues.put(LoginDBOpenHelper.KEY_PASSWORD,password);
-			
-	        String where= LoginDBOpenHelper.KEY_EMAIL + " = ?";
-		    db.update(LoginDBOpenHelper.DATABASE_TABLE, updatedValues, where, new String[]{emailAddress});			   
-		}		
+		
+		cursor.moveToFirst();
+		
+		password = cursor.getString(cursor.getColumnIndex(LoginDBOpenHelper.KEY_PASSWORD));
+		
+		cursor.close();
+		
+		return password;				
+	}
+	
+	public void  updateEntry(String fullName, String emailAddress, String password)
+	{
+		// Define the updated row content.
+		ContentValues updatedValues = new ContentValues();
+		// Assign values for each row.
+		updatedValues.put(LoginDBOpenHelper.KEY_PASSWORD, fullName);
+		updatedValues.put(LoginDBOpenHelper.KEY_PASSWORD,password);
+
+		String where= LoginDBOpenHelper.KEY_EMAIL + " = ?";
+		
+		db.update(LoginDBOpenHelper.DATABASE_TABLE, updatedValues, where, new String[]{emailAddress});			   
+	}		
 }
 
 

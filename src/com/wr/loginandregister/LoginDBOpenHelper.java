@@ -18,6 +18,8 @@ public class LoginDBOpenHelper extends SQLiteOpenHelper
 	public static final int DATABASE_VERSION = 1;
 	public static final String DATABASE_TABLE = "LOGIN";
 	
+	private static final String LOG_TAG = "com.wr.loginandregister.LoginDBOpenHelper";
+	
 	// SQL Statement to create a new database.
 	private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE +
 			"( " + KEY_ID +" integer primary key autoincrement,"
@@ -27,7 +29,7 @@ public class LoginDBOpenHelper extends SQLiteOpenHelper
 		
 	public LoginDBOpenHelper(Context context) 
     {
-	           super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
 	// Called when no database exists in disk and the helper class needs
@@ -35,25 +37,32 @@ public class LoginDBOpenHelper extends SQLiteOpenHelper
 	@Override
 	public void onCreate(SQLiteDatabase _db) 
 	{
-			_db.execSQL(DATABASE_CREATE);
+		Log.v(LOG_TAG, "onCreate");
+		
+		Log.d(LOG_TAG, DATABASE_CREATE);
+		_db.execSQL(DATABASE_CREATE);
 			
 	}
+	
 	// Called when there is a database version mismatch meaning that the version
 	// of the database on disk needs to be upgraded to the current version.
 	@Override
 	public void onUpgrade(SQLiteDatabase _db, int _oldVersion, int _newVersion) 
 	{
-			// Log the version upgrade.
-			Log.w("TaskDBAdapter", "Upgrading from version " +_oldVersion + " to " +_newVersion + ", which will destroy all old data");
-	
-	
-			// Upgrade the existing database to conform to the new version. Multiple
-			// previous versions can be handled by comparing _oldVersion and _newVersion
-			// values.
-			// The simplest case is to drop the old table and create a new one.
-			_db.execSQL("DROP TABLE IF EXISTS " + "TEMPLATE");
-			// Create a new one.
-			onCreate(_db);
+		Log.v(LOG_TAG, "onUpgrade");
+		
+		// Log the version upgrade.
+		Log.w(LOG_TAG, "Upgrading from version " +_oldVersion + " to " +_newVersion + ", which will destroy all old data");
+
+
+		// Upgrade the existing database to conform to the new version. Multiple
+		// previous versions can be handled by comparing _oldVersion and _newVersion
+		// values.
+		// The simplest case is to drop the old table and create a new one.
+		_db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+		
+		// Create a new one.
+		onCreate(_db);
 	}
 	
 
